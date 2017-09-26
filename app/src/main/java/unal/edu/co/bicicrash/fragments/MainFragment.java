@@ -1,16 +1,19 @@
 package unal.edu.co.bicicrash.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import unal.edu.co.bicicrash.Activities.RegressiveTime;
 import unal.edu.co.bicicrash.R;
 
 import static android.R.attr.data;
@@ -19,6 +22,7 @@ import static android.R.attr.data;
 public class MainFragment extends Fragment {
 
     ToggleButton toggleAcelerometerButtom;
+    Button crashButton;
 
     public MainFragment() {
         // Required empty public constructor
@@ -42,6 +46,15 @@ public class MainFragment extends Fragment {
                     Toast.makeText(getContext(), "Boton Deshabilitado ", Toast.LENGTH_SHORT).show();
                     //TODO DesActivar acelerometro
                 }
+            }
+        });
+
+        crashButton = (Button) view.findViewById(R.id.buttonTest);
+        crashButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent redirect = new Intent(getActivity(), RegressiveTime.class);
+                startActivity(redirect);
             }
         });
         return view;
