@@ -25,6 +25,7 @@ public class RegressiveTime extends AppCompatActivity {
         aceptButton =  (FloatingActionButton) findViewById(R.id.floatingActionButtonAcept);
         cancelButton =  (FloatingActionButton) findViewById(R.id.floatingActionButtonClose);
 
+        //Objeto que permite la cuenta regresiva
         new CountDownTimer(20000, 1000) {
 
             public void onTick(long millisUntilFinished) {

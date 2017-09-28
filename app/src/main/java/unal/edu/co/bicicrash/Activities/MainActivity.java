@@ -1,6 +1,7 @@
 package unal.edu.co.bicicrash.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,7 +43,12 @@ public class MainActivity extends AppCompatActivity{
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(mViewPager);
 
+        //Bloque la orientacion. En caso de un choque el telefono no cambiará su orientacion
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
