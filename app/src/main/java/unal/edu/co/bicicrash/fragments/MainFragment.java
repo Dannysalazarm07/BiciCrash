@@ -18,6 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import unal.edu.co.bicicrash.Activities.RegressiveTime;
 import unal.edu.co.bicicrash.R;
 
@@ -31,14 +35,16 @@ public class MainFragment extends Fragment implements SensorEventListener{
     private float prevX = 0, prevY = 0, prevZ = 0;
     private float curX = 0, curY = 0, curZ = 0;
 
-    View view;
-    ToggleButton toggleAcelerometerButtom;
-    Button crashButton;
+    private View view;
+    private ToggleButton toggleAcelerometerButtom;
+    private Button crashButton;
 
-    SensorManager mSensorManager;
-    Sensor mSensorAcc;
+    private SensorManager mSensorManager;
+    private Sensor mSensorAcc;
+    private GraphView graph;
+    private LineGraphSeries<DataPoint> series;
+    private TextView textView;
 
-    TextView textView;
 
 
     public MainFragment() {
@@ -48,8 +54,22 @@ public class MainFragment extends Fragment implements SensorEventListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        //El grafico que muestra los resultados del acelerometro
+        graph = (GraphView) view.findViewById(R.id.graph);
+        series = new LineGraphSeries<>(
+                //NOTA: ESTOS PUNTOS SON EJEMPLOS SON DE PRUEBA
+                new DataPoint[] {
+                    new DataPoint(0, 0),
+                    new DataPoint(1, 1),
+                    new DataPoint(2, 2),
+                    new DataPoint(3, 1),
+                    new DataPoint(4, 4)
+                }
+                );
 
         textView =  (TextView) view.findViewById(R.id.textView);
         mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
@@ -97,6 +117,7 @@ public class MainFragment extends Fragment implements SensorEventListener{
         mSensorManager.unregisterListener(this);
     }
 
+    int count = 5;
     //Este metodo detecta los cambios del acelerometro
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -124,6 +145,13 @@ public class MainFragment extends Fragment implements SensorEventListener{
             long time_difference = current_time - last_update;
             if (time_difference > 0) {
                 float movement = Math.abs((curX + curY + curZ) - (prevX - prevY - prevZ)) / time_difference;
+
+                //TODO Falta revisar el calculo del acelerometro
+                //TODO Aun no se sabe cuales son los datos a graficar
+                //TODO El acelerometro da mucha informacoin por segundo y la aplicacion se traba al intentar graficarla
+                // TODO Metodo para graficar en tiempo de ejecucion: series.appendData(new DataPoint(count++,count++), true, 4);
+                graph.addSeries(series);
+
                 int limit = 1500;
                 float min_movement = 1E-6f;
                 if (movement > min_movement) {

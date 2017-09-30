@@ -5,15 +5,23 @@
     android:layout_height="match_parent"
     tools:context="unal.edu.co.bicicrash.fragments.MainFragment">
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/graph" />
+
+
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
-        android:layout_marginTop="81dp"
-        android:text="AQUI VA EL ACELEROMETRO" />
+        android:layout_marginEnd="21dp"
+        android:text="AQUI VA EL ACELEROMETRO"
+        android:layout_above="@+id/toggleAcelerometerButtom"
+        android:layout_alignEnd="@+id/toggleAcelerometerButtom"
+        android:layout_marginBottom="13dp" />
 
     <ToggleButton
         android:id="@+id/toggleAcelerometerButtom"
