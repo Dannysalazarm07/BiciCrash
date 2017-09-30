@@ -1,12 +1,10 @@
-package unal.edu.co.bicicrash.fragments;
+package unal.edu.co.bicicrash.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,7 +23,6 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import unal.edu.co.bicicrash.Activities.RegressiveTime;
 import unal.edu.co.bicicrash.R;
 
-import static android.R.attr.data;
 import static android.content.Context.SENSOR_SERVICE;
 
 
@@ -121,11 +118,8 @@ public class MainFragment extends Fragment implements SensorEventListener{
     //Este metodo detecta los cambios del acelerometro
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        float x,y,z;
-        x =  sensorEvent.values[0];
-        y =  sensorEvent.values[1];
-        z =  sensorEvent.values[2];
-        textView.setText("x: " + x + "\ny: " + y + "\nz: " + z);
+
+
 
         synchronized (this) {
             long current_time = sensorEvent.timestamp;
@@ -133,6 +127,8 @@ public class MainFragment extends Fragment implements SensorEventListener{
             curX = sensorEvent.values[0];
             curY = sensorEvent.values[1];
             curZ = sensorEvent.values[2];
+
+            textView.setText("x: " + curX + "\ny: " + curY + "\nz: " + curZ);
 
             if (prevX == 0 && prevY == 0 && prevZ == 0) {
                 last_update = current_time;
@@ -149,7 +145,7 @@ public class MainFragment extends Fragment implements SensorEventListener{
                 //TODO Falta revisar el calculo del acelerometro
                 //TODO Aun no se sabe cuales son los datos a graficar
                 //TODO El acelerometro da mucha informacoin por segundo y la aplicacion se traba al intentar graficarla
-                // TODO Metodo para graficar en tiempo de ejecucion: series.appendData(new DataPoint(count++,count++), true, 4);
+                //TODO Metodo para graficar en tiempo de ejecucion: series.appendData(new DataPoint(count++,count++), true, 4);
                 graph.addSeries(series);
 
                 int limit = 1500;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import unal.edu.co.bicicrash.R;
-import unal.edu.co.bicicrash.fragments.MainFragment;
 
 public class RegressiveTime extends AppCompatActivity {
     TextView timerView;

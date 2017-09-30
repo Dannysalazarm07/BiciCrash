@@ -4,12 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.google.android.gms.maps.MapFragment;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import unal.edu.co.bicicrash.fragments.BiciMapFragment;
+import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
 
 /**
  * Un {@link FragmentPagerAdapter} que gestiona las secciones, fragmentos y

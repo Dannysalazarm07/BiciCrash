@@ -6,33 +6,27 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import unal.edu.co.bicicrash.R;
 import unal.edu.co.bicicrash.Utils.SectionsPagerAdapterForMainActivity;
-import unal.edu.co.bicicrash.fragments.MainFragment;
-import unal.edu.co.bicicrash.fragments.BiciMapFragment;
-import unal.edu.co.bicicrash.Utils.SectionsPagerAdapter;
+import unal.edu.co.bicicrash.Fragments.MainFragment;
+import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 

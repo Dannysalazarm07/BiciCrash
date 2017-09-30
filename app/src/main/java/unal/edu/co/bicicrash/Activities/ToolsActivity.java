@@ -10,9 +10,9 @@ import unal.edu.co.bicicrash.Utils.SectionsPagerAdapter;
 
 
 import unal.edu.co.bicicrash.R;
-import unal.edu.co.bicicrash.fragments.ContactsFragment;
-import unal.edu.co.bicicrash.fragments.InformationFragment;
-import unal.edu.co.bicicrash.fragments.SettingsFragment;
+import unal.edu.co.bicicrash.Fragments.ContactsFragment;
+import unal.edu.co.bicicrash.Fragments.InformationFragment;
+import unal.edu.co.bicicrash.Fragments.SettingsFragment;
 
 public class ToolsActivity extends AppCompatActivity {
     ViewPager mViewPagerTool;
