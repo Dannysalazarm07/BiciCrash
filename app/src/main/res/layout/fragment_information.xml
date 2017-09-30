@@ -12,261 +12,268 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:id="@+id/appBarLayout2">
             </android.support.design.widget.AppBarLayout>
-
-
-
-    <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/account_settings"/>
-
-
-    <LinearLayout
-        android:id="@+id/area_nombre"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/imageButton"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_cliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/account_settings" />
+        <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_nombre"
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageButton"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/account_settings"/>
+
+        <LinearLayout
+            android:id="@+id/area_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:hint="@string/hint_nombre"
-            >
+            android:orientation="horizontal"
+            android:layout_below="@+id/imageButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
 
-            <EditText
-                android:id="@+id/campo_nombre"
+            <ImageView
+                android:id="@+id/img_cliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/account_settings" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
-    android:id="@+id/area_telefono"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/area_nombre"
-        android:layout_alignParentStart="true">
+                android:layout_marginLeft="32dp"
+                android:hint="@string/hint_nombre"
+                >
 
-    <ImageView
-        android:id="@+id/img_correo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/phone" />
+                <EditText
+                    android:id="@+id/campo_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_telefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp">
-
-        <EditText
-            android:id="@+id/campo_telefono"
+        <LinearLayout
+            android:id="@+id/area_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/hint_telefono"
-            android:inputType="phone" />
-    </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_marginTop="11dp"
+                android:layout_below="@+id/area_nombre"
+                android:layout_alignParentStart="true">
 
-    <LinearLayout
-    android:id="@+id/area_correo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/area_telefono"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
+            <ImageView
+                android:id="@+id/img_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/phone" />
 
-        <ImageView
-            android:id="@+id/img_telefono"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_correo"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:layout_row="2"
-            android:src="@drawable/email" />
-
-        <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_correo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp">
-
-        <EditText
-            android:id="@+id/campo_correo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/hint_correo"
-            android:inputType="textEmailAddress"
-            android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/area_genero"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/area_correo"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
-
-        <ImageView
-            android:id="@+id/img_genero"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_correo"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:layout_row="2"
-            android:src="@drawable/gender_male_female" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_genero"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp">
-
-            <EditText
-                android:id="@+id/campo_genreo"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_genero"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:layout_marginLeft="32dp">
 
-    <LinearLayout
-        android:id="@+id/area_rh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/area_genero"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
+                <EditText
+                    android:id="@+id/campo_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_telefono"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_rh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_genero"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:layout_row="2"
-            android:src="@drawable/heart_pulse" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_rh"
+        <LinearLayout
+            android:id="@+id/area_correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp">
+                android:orientation="horizontal"
+                android:layout_below="@+id/area_telefono"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp">
 
-            <EditText
-                android:id="@+id/campo_rh"
+                <ImageView
+                    android:id="@+id/img_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_correo"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:layout_row="2"
+                    android:src="@drawable/email" />
+
+                <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_rh"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:layout_marginLeft="32dp">
 
-    <LinearLayout
-        android:id="@+id/area_eps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/area_rh"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
+                <EditText
+                    android:id="@+id/campo_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_correo"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_eps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_rh"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:layout_row="2"
-            android:src="@drawable/medical_bag" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_eps"
+        <LinearLayout
+            android:id="@+id/area_genero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp">
+            android:orientation="horizontal"
+            android:layout_below="@+id/area_correo"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
 
-            <EditText
-                android:id="@+id/campo_eps"
+            <ImageView
+                android:id="@+id/img_genero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_correo"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"
+                android:layout_row="2"
+                android:src="@drawable/gender_male_female" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_genero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_eps"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:layout_marginLeft="32dp">
 
-    <LinearLayout
-        android:id="@+id/area_seguro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/area_eps"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp">
+                <EditText
+                    android:id="@+id/campo_genreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_genero"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_seguro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_eps"
-            android:layout_column="0"
-            android:layout_gravity="center_vertical"
-            android:layout_row="2"
-            android:src="@drawable/alarm_light" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_seguro"
+        <LinearLayout
+            android:id="@+id/area_rh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp">
+            android:orientation="horizontal"
+            android:layout_below="@+id/area_genero"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
 
-            <EditText
-                android:id="@+id/campo_seguro"
+            <ImageView
+                android:id="@+id/img_rh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_genero"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"
+                android:layout_row="2"
+                android:src="@drawable/heart_pulse" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_rh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_seguro"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+                android:layout_marginLeft="32dp">
 
+                <EditText
+                    android:id="@+id/campo_rh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_rh"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/area_eps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/area_rh"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/img_eps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_rh"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"
+                android:layout_row="2"
+                android:src="@drawable/medical_bag" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_eps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp">
+
+                <EditText
+                    android:id="@+id/campo_eps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_eps"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/area_seguro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/area_eps"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/img_seguro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_eps"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"
+                android:layout_row="2"
+                android:src="@drawable/alarm_light" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_seguro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp">
+
+                <EditText
+                    android:id="@+id/campo_seguro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_seguro"
+                    android:inputType="text"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 </RelativeLayout>
