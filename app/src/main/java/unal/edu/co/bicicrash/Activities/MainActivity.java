@@ -3,30 +3,28 @@ package unal.edu.co.bicicrash.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import unal.edu.co.bicicrash.R;
+import unal.edu.co.bicicrash.Utils.SectionsPagerAdapterForMainActivity;
 import unal.edu.co.bicicrash.fragments.MainFragment;
-import unal.edu.co.bicicrash.fragments.MapFragment;
+import unal.edu.co.bicicrash.fragments.BiciMapFragment;
 import unal.edu.co.bicicrash.Utils.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    ViewPager mViewPager;
+    ViewPager mViewPager;BiciMapFragment mBiciMapFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +44,6 @@ public class MainActivity extends AppCompatActivity{
         //Bloque la orientacion. En caso de un choque el telefono no cambiará su orientacion
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,15 +72,18 @@ public class MainActivity extends AppCompatActivity{
     private void setupViewPager(ViewPager viewPager) {
         //El adaptador enlaza las biñetas del ViewPager con cada Fragment.
         // Administra la forma de mostar las Fragments
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        //Nota, este adaptador es configurado unicamente para los gragmentos incrustados en el mainActivity, debido a que manjea tipos diferentes de Fragments
+        SectionsPagerAdapterForMainActivity adapter = new SectionsPagerAdapterForMainActivity(getSupportFragmentManager());
         //Se agregaa el Fragment pricipal que muestra las señales del acelerometro
         adapter.addFragment(new MainFragment(), getString(R.string.title_section1));
         //Se agregaa el Fragment pricipal que muestra el mapa de accidentes
-        adapter.addFragment(new MapFragment(), getString(R.string.title_section2));
+        adapter.addBiciMapFragment( BiciMapFragment.newInstance(), getString(R.string.title_section2));
 
         viewPager.setAdapter(adapter);
-
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
 
+    }
 }
