@@ -128,7 +128,7 @@ public class MainFragment extends Fragment implements SensorEventListener{
             curY = sensorEvent.values[1];
             curZ = sensorEvent.values[2];
 
-            textView.setText("x: " + curX + "\ny: " + curY + "\nz: " + curZ);
+            //textView.setText("x: " + curX + "\ny: " + curY + "\nz: " + curZ);
 
             if (prevX == 0 && prevY == 0 && prevZ == 0) {
                 last_update = current_time;
