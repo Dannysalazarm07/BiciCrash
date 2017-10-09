@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="21dp"
-        android:text="AQUI VA EL ACELEROMETRO"
+        android:text=""
         android:layout_above="@+id/toggleAcelerometerButtom"
         android:layout_alignEnd="@+id/toggleAcelerometerButtom"
         android:layout_marginBottom="13dp" />
@@ -32,16 +32,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="105dp"
         android:text="ToggleButton" />
-
-    <Button
-        android:id="@+id/buttonTest"
-        style="@android:style/Widget.Material.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/toggleAcelerometerButtom"
-        android:layout_marginBottom="24dp"
-        android:text="Prueba de Caida" />
 
 
 </RelativeLayout>
