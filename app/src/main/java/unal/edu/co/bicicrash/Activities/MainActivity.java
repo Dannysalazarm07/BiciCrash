@@ -15,37 +15,42 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DateFormat;
 import java.util.Date;
 
+import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
+import unal.edu.co.bicicrash.Fragments.MainFragment;
 import unal.edu.co.bicicrash.R;
 import unal.edu.co.bicicrash.Utils.SectionsPagerAdapterForMainActivity;
-import unal.edu.co.bicicrash.Fragments.MainFragment;
-import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MainActivity extends AppCompatActivity implements  OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener,LocationListener {
 
     private ViewPager mViewPager;
     private BiciMapFragment mBiciMapFragment;
     private static final int LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     private Location mCurrentLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+    private static final float SMALLEST_DISPLACEMENT = 0.15F; //con esto obtenemos desplazamiento minimo "un cuarto de metro"
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //Bloque la orientacion. En caso de un choque el telefono no cambiará su orientacion
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
 
     }
@@ -120,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Controles UI
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
+            buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
 
             //TODO encontrar ubicacion actual
@@ -128,14 +135,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             //TODO graficar los compañeros a 1 km de distancia
 
 
-
             //// OJO: Se grafican los siguinte puntos en el mapa a manera de ejemplo//////
             LatLng unal = new LatLng(4.6381938, -74.08404639999998);
             LatLng friend1 = new LatLng(4.6371948, -74.08404639999998);
             LatLng friend2 = new LatLng(4.6391938, -74.08404639999998);
             LatLng friend3 = new LatLng(4.6381938, -74.08414539999998);
             LatLng friend4 = new LatLng(4.6381938, -74.08424439999998);
-
 
 
             googleMap.addMarker(new MarkerOptions()
@@ -168,30 +173,35 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .snippet("Accidente a A 100 mtrs")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
-            CameraPosition cameraPosition = CameraPosition.builder()
-                    .target(unal)
-                    .zoom(15)
-                    .build();
 
-            googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
                 // Mostrar diálogo explicativo
+                buildGoogleApiClient();
             } else {
                 // Solicitar permiso
                 ActivityCompat.requestPermissions(
                         this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         LOCATION_REQUEST_CODE);
+                buildGoogleApiClient();
             }
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
+    }
 
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
     }
 
 
@@ -207,13 +217,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void agregarMarcador() {
 
         LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
 
-        System.out.println("variable lat" + mCurrentLocation.getLatitude());
-        mMap.addMarker(new MarkerOptions()
-                .position(currentLatLng)
-                .title("Universidad Nacional")
-                .snippet("Mi ubicacion actual")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+
+
     }
 
     @Override
@@ -231,8 +238,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
 
     }
 
