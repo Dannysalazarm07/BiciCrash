@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class ContactsFragment extends Fragment {
 
     private View view;
     private TextView contactNumber;
-    private Button buttonPickContact;
+    private FloatingActionButton buttonPickContact;
     private ListView contactListView;
 
     ArrayList arrayContacts;
@@ -46,8 +47,7 @@ public class ContactsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        contactNumber = (TextView) view.findViewById(R.id.contactnumber);
-        buttonPickContact = (Button) view.findViewById(R.id.pickcontact);
+        buttonPickContact = (FloatingActionButton) view.findViewById(R.id.pickcontact);
 
         arrayContacts = new ArrayList<BiciContact>();
         contactListView = (ListView)view.findViewById(R.id.listViewContact);
@@ -65,7 +65,6 @@ public class ContactsFragment extends Fragment {
                 }
             }
         });
-
 
         return view;
     }
@@ -102,8 +101,6 @@ public class ContactsFragment extends Fragment {
 
     public void addContact(String name, String number){
         arrayContacts.add(new BiciContact(name,number));
-        contactNumber.setText("Se ha añadido: " + String.valueOf(name)+" : " + String.valueOf(number));
-
     }
 
     public void showContacts(){
