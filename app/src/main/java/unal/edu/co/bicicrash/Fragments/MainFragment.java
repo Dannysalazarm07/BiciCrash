@@ -78,7 +78,7 @@ public class MainFragment extends Fragment{
         sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                                //synchronized - evita problemas de concurrencia
+                //synchronized - evita problemas de concurrencia
                 synchronized (this) {
                     long current_time = sensorEvent.timestamp; //fecha/hora actual en nanosegundos
                     curX = sensorEvent.values[0];
@@ -98,9 +98,9 @@ public class MainFragment extends Fragment{
 
                         textView.setText(
                                 "x: " + curX +
-                                "\ny: " + curY +
-                                "\nz: " + curZ +
-                                "\nSuma: " + sumForces +
+                                        "\ny: " + curY +
+                                        "\nz: " + curZ +
+                                        "\nSuma: " + sumForces +
                                         "\nMaximo: : " + max);
                     }
                 }
@@ -136,60 +136,6 @@ public class MainFragment extends Fragment{
     public void onPause() {
         mSensorManager.unregisterListener(sensorEventListener);
         super.onPause();
-<<<<<<< HEAD
-        mSensorManager.unregisterListener(this);
-    }
-
-    int count = 5;
-    //Este metodo detecta los cambios del acelerometro
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-
-
-
-        synchronized (this) {
-            long current_time = sensorEvent.timestamp;
-
-            curX = sensorEvent.values[0];
-            curY = sensorEvent.values[1];
-            curZ = sensorEvent.values[2];
-
-            //textView.setText("x: " + curX + "\ny: " + curY + "\nz: " + curZ);
-
-            if (prevX == 0 && prevY == 0 && prevZ == 0) {
-                last_update = current_time;
-                last_movement = current_time;
-                prevX = curX;
-                prevY = curY;
-                prevZ = curZ;
-            }
-
-            long time_difference = current_time - last_update;
-            if (time_difference > 0) {
-                float movement = Math.abs((curX + curY + curZ) - (prevX - prevY - prevZ)) / time_difference;
-
-                //TODO Falta revisar el calculo del acelerometro
-                //TODO Aun no se sabe cuales son los datos a graficar
-                //TODO El acelerometro da mucha informacoin por segundo y la aplicacion se traba al intentar graficarla
-                //TODO Metodo para graficar en tiempo de ejecucion: series.appendData(new DataPoint(count++,count++), true, 4);
-                graph.addSeries(series);
-
-                int limit = 1500;
-                float min_movement = 1E-6f;
-                if (movement > min_movement) {
-                    if (current_time - last_movement >= limit) {
-                        Toast.makeText(view.getContext(), "Hay movimiento de " + movement, Toast.LENGTH_SHORT).show();
-                    }
-                    last_movement = current_time;
-                }
-                prevX = curX;
-                prevY = curY;
-                prevZ = curZ;
-                last_update = current_time;
-            }
-        }
-=======
->>>>>>> miguel
     }
 
 }
