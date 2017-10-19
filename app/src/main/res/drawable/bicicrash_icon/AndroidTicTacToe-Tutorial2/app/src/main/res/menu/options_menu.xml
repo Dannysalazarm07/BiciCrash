@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/new_game"
+        android:icon="@drawable/ic_action_joypad"
+        android:title="New Game"
+        app:showAsAction="always"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/ai_difficulty"
+        android:icon="@drawable/ic_action_settings"
+        android:title="Difficulty"
+        app:showAsAction="always"
+        android:visible="true" />
+    <item
+        android:id="@+id/quit"
+        android:icon="@drawable/ic_action_exit"
+        android:title="Quit"
+        app:showAsAction="always"
+        android:visible="true" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_triqui"
+        android:title="About"
+        app:showAsAction="always"
+        android:visible="true" />
+
+
+</menu>
