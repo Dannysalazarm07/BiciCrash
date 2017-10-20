@@ -17,8 +17,8 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDeMPwKTH6h-w1cZLYs519Jhthq7sfL_dw"/>
-            <!--android:value="AIzaSyCn5rViKFw0tKbqB7fX92UNwvnExJqGIXU"-->
+            android:value="AIzaSyCn5rViKFw0tKbqB7fX92UNwvnExJqGIXU"/>
+        <!--android:value="AIzaSyDeMPwKTH6h-w1cZLYs519Jhthq7sfL_dw"/>-->
 
         <activity
             android:name=".Activities.MainActivity"
@@ -26,15 +26,21 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
         <activity
             android:name=".Activities.ToolsActivity"
             android:label="@string/title_activity_tools"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.RegressiveTime"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".Activities.RegressiveTime">
+
+        </activity>
     </application>
 
 </manifest>
