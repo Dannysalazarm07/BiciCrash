@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "371154216830",
+    "firebase_url": "https://bicicrash-181416.firebaseio.com",
+    "project_id": "bicicrash-181416",
+    "storage_bucket": "bicicrash-181416.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371154216830:android:3749706e896b1786",
+        "android_client_info": {
+          "package_name": "unal.edu.co.bicicrash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371154216830-r1k8r0h0bvf59k95edg7vbbo1v0b1d4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "unal.edu.co.bicicrash",
+            "certificate_hash": "142fee246bcc178613ce02cf80daa4d3549ea327"
+          }
+        },
+        {
+          "client_id": "371154216830-cld5atsiru6v5l3aml81dt9b6u7vlhdg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_7LAko4hrYxh9Dq2YYv4FhOu2Y8ST7O4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371154216830-cld5atsiru6v5l3aml81dt9b6u7vlhdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
