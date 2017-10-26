@@ -7,7 +7,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import unal.edu.co.bicicrash.Activities.RegressiveTime;
@@ -78,7 +84,7 @@ public class MainFragment extends Fragment{
         sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                                //synchronized - evita problemas de concurrencia
+                //synchronized - evita problemas de concurrencia
                 synchronized (this) {
                     long current_time = sensorEvent.timestamp; //fecha/hora actual en nanosegundos
                     curX = sensorEvent.values[0];
@@ -98,9 +104,9 @@ public class MainFragment extends Fragment{
 
                         textView.setText(
                                 "x: " + curX +
-                                "\ny: " + curY +
-                                "\nz: " + curZ +
-                                "\nSuma: " + sumForces +
+                                        "\ny: " + curY +
+                                        "\nz: " + curZ +
+                                        "\nSuma: " + sumForces +
                                         "\nMaximo: : " + max);
                     }
                 }
@@ -124,6 +130,33 @@ public class MainFragment extends Fragment{
             }
         });
 
+        view.findViewById(R.id.log_out_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view.getId() == R.id.log_out_button){
+                    AuthUI.getInstance()
+                            .signOut(getActivity())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    Log.d("AUTH", "Usuario no esta logeado");
+                                    //getActivity().finish();
+                                    startActivityForResult(AuthUI.getInstance()
+                                            .createSignInIntentBuilder()
+                                            .setAvailableProviders(
+                                                    Arrays.asList(
+                                                            new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                            new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build())
+
+                                            ).build(), 0);
+                                }
+                            });
+                }
+
+            }
+        });
         return view;
     }
 
