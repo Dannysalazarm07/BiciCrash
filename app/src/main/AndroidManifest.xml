@@ -22,6 +22,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBX-Qfq5LYaH7g10PcVgzhPAjhsgN2JMbo" />
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id"/>
+
         <!-- android:value="AIzaSyDeMPwKTH6h-w1cZLYs519Jhthq7sfL_dw"/> -->
         <!-- android:value="AIzaSyCn5rViKFw0tKbqB7fX92UNwvnExJqGIXU" -->
 
@@ -41,7 +44,13 @@
             android:label="@string/title_activity_tools"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.RegressiveTime" />
-        <activity android:name=".Activities.SahreOnFb"></activity>
+        <activity android:name=".Activities.SahreOnFb">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
     </application>
 
 </manifest>
