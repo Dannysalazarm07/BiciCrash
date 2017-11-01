@@ -1,5 +1,6 @@
 package unal.edu.co.bicicrash.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -26,7 +27,6 @@ public class ShareOnFb extends FragmentActivity {
     //final Button button2 = (Button) findViewById(R.id.button2);
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,14 +37,23 @@ public class ShareOnFb extends FragmentActivity {
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                findViewById(R.id.button2).performClick();
-//            }
-//        }, 5000);
 
-        publicar();
+        final Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                    publicar();
+            }
+        });
+        thread.start();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("Mensaje", "ENTRANDOOOO");
+                thread.interrupt();
+            }
+        }, 5000);
+
+        //publicar();
     }
 
     public static void hola(){
@@ -53,6 +62,7 @@ public class ShareOnFb extends FragmentActivity {
     }
 
     public void publicar(){
+
         //intent = new Intent(this, ShareOnFb.class);
         try {
 
@@ -66,7 +76,7 @@ public class ShareOnFb extends FragmentActivity {
 //                shareDialog.show(linkContent);
 //                //startActivity(intent);
 
-                ShareLinkContent content = new ShareLinkContent.Builder()
+                final ShareLinkContent content = new ShareLinkContent.Builder()
                         .setContentUrl(Uri.parse("https://developers.facebook.com"))
                         .setQuote("Prueba BiciCrash")
                         .build();
@@ -85,6 +95,5 @@ public class ShareOnFb extends FragmentActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         startActivity(intent);
     }
-
 
 }

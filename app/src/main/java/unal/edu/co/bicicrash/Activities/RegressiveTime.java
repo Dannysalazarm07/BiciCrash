@@ -36,7 +36,7 @@ public class RegressiveTime extends AppCompatActivity {
 
 
         //Objeto que permite la cuenta regresiva
-        new CountDownTimer(20000, 1000) {
+        new CountDownTimer(2000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timerView.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -45,6 +45,7 @@ public class RegressiveTime extends AppCompatActivity {
             public void onFinish() {
                 timerView.setText("done!");
                 startActivity(myIntent);
+
                 // TODO redirecciona a una actividad con la informacion del usuario
                 // TODO envia mensajes a todos los contactos
             }
