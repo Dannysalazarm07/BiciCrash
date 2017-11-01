@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="unal.edu.co.bicicrash.Activities.SahreOnFb">
+    tools:context="unal.edu.co.bicicrash.Activities.ShareOnFb">
 
     <Button
         android:id="@+id/button2"

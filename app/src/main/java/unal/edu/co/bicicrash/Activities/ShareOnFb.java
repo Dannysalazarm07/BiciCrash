@@ -19,7 +19,7 @@ import com.facebook.share.widget.ShareDialog;
 
 import unal.edu.co.bicicrash.R;
 
-public class SahreOnFb extends FragmentActivity {
+public class ShareOnFb extends FragmentActivity {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
     Intent intent;
@@ -29,22 +29,31 @@ public class SahreOnFb extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        intent = new Intent(this, MainActivity.class);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sahre_on_fb);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                findViewById(R.id.button2).performClick();
-            }
-        }, 5000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                findViewById(R.id.button2).performClick();
+//            }
+//        }, 5000);
 
+        publicar();
     }
 
-    public void publicar(View view){
-        //intent = new Intent(this, SahreOnFb.class);
+    public static void hola(){
+        if(true){
+        }
+    }
+
+    public void publicar(){
+        //intent = new Intent(this, ShareOnFb.class);
         try {
 
             if (ShareDialog.canShow(ShareLinkContent.class)) {
@@ -74,6 +83,7 @@ public class SahreOnFb extends FragmentActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+        startActivity(intent);
     }
 
 
