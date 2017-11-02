@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
+import com.facebook.FacebookDialog;
+import com.facebook.FacebookSdk;
+import com.facebook.internal.FacebookDialogFragment;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -23,47 +26,39 @@ import unal.edu.co.bicicrash.R;
 public class ShareOnFb extends FragmentActivity {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
-    Intent intent;
-    //final Button button2 = (Button) findViewById(R.id.button2);
+    Intent intentAfterFB=new Intent(this, MainActivity.class);
+
+     ShareLinkContent content;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        intent = new Intent(this, MainActivity.class);
+
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sahre_on_fb);
+    //  setContentView(R.layout.activity_sahre_on_fb);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
-
 
         final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                    publicar();
+                publicar();
             }
         });
         thread.start();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //shareDialog.show(content);
                 Log.d("Mensaje", "ENTRANDOOOO");
-                thread.interrupt();
+                //thread.interrupt();
             }
         }, 5000);
-
-        //publicar();
     }
 
-    public static void hola(){
-        if(true){
-        }
-    }
-
-    public void publicar(){
-
-        //intent = new Intent(this, ShareOnFb.class);
+    public  void publicar(){
         try {
 
             if (ShareDialog.canShow(ShareLinkContent.class)) {
@@ -76,10 +71,12 @@ public class ShareOnFb extends FragmentActivity {
 //                shareDialog.show(linkContent);
 //                //startActivity(intent);
 
-                final ShareLinkContent content = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                content = new ShareLinkContent.Builder()
                         .setQuote("Prueba BiciCrash")
+                        .setContentUrl(Uri.parse("http://google.com"))
                         .build();
+
+                FacebookSdk.getExecutor();
                 shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
 
             }
@@ -93,7 +90,7 @@ public class ShareOnFb extends FragmentActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
-        startActivity(intent);
+        finish();
     }
 
 }
