@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <CheckBoxPreference
+        android:key="facebookPublic"
+        android:title="Facebook"
+        android:defaultValue="false"
+        android:summary="Publicar mensaje en el muro de facebook" />
+
+
+    <EditTextPreference
+        android:key="messageConfig"
+        android:summary="Ingrese el texto"
+        android:defaultValue="@string/message_warning"
+        android:title="@string/message_title"  />
+
+    <EditTextPreference
+        android:key="timeForWait"
+        android:summary="Seleccione el timepo de espera"
+        android:defaultValue="20"
+        android:numeric="integer"
+        android:title="Tiempo de espera"  />
+
+
+
+
 </PreferenceScreen>

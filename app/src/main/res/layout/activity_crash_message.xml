@@ -29,7 +29,7 @@
                 android:src="@drawable/account_settings"/>
 
             <LinearLayout
-                android:id="@+id/area_nombre"
+                android:id="@+id/crash_area_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -38,14 +38,14 @@
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_cliente"
+                    android:id="@+id/crash_img_cliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/account_settings" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_nombre"
+                    android:id="@+id/crash_til_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
@@ -53,7 +53,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/campo_nombre"
+                        android:id="@+id/crash_campo_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -63,29 +63,29 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_cedula"
+                android:id="@+id/crash_area_cedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="11dp"
-                android:layout_below="@+id/area_nombre"
+                android:layout_below="@+id/crash_area_nombre"
                 android:layout_alignParentStart="true">
 
                 <ImageView
-                    android:id="@+id/img_cedula"
+                    android:id="@+id/crash_img_cedula"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/file_document_box" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_cedula"
+                    android:id="@+id/crash_til_cedula"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_cedula"
+                        android:id="@+id/crash_campo_cedula"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -95,29 +95,29 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_telefono"
+                android:id="@+id/crash_area_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="11dp"
-                android:layout_below="@+id/area_cedula"
+                android:layout_below="@+id/crash_area_cedula"
                 android:layout_alignParentStart="true">
 
                 <ImageView
-                    android:id="@+id/img_telefono"
+                    android:id="@+id/crash_img_telefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/phone" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_telefono"
+                    android:id="@+id/crash_til_telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_telefono"
+                        android:id="@+id/crash_campo_telefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -127,32 +127,32 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_correo"
+                android:id="@+id/crash_area_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/area_telefono"
+                android:layout_below="@+id/crash_area_telefono"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_correo"
+                    android:id="@+id/crash_img_correo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_correo"
+                    android:layout_below="@+id/crash_img_correo"
                     android:layout_column="0"
                     android:layout_gravity="center_vertical"
                     android:layout_row="2"
                     android:src="@drawable/email" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_correo"
+                    android:id="@+id/crash_til_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_correo"
+                        android:id="@+id/crash_campo_correo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -163,32 +163,32 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_genero"
+                android:id="@+id/crash_area_genero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/area_correo"
+                android:layout_below="@+id/crash_area_correo"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_genero"
+                    android:id="@+id/crash_img_genero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_correo"
+                    android:layout_below="@+id/crash_img_correo"
                     android:layout_column="0"
                     android:layout_gravity="center_vertical"
                     android:layout_row="2"
                     android:src="@drawable/gender_male_female" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_genero"
+                    android:id="@+id/crash_til_genero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_genero"
+                        android:id="@+id/crash_campo_genero"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -199,32 +199,32 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_rh"
+                android:id="@+id/crash_area_rh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/area_genero"
+                android:layout_below="@+id/crash_area_genero"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_rh"
+                    android:id="@+id/crash_img_rh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_genero"
+                    android:layout_below="@+id/crash_img_genero"
                     android:layout_column="0"
                     android:layout_gravity="center_vertical"
                     android:layout_row="2"
                     android:src="@drawable/heart_pulse" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_rh"
+                    android:id="@+id/crash_til_rh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_rh"
+                        android:id="@+id/crash_campo_rh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -235,32 +235,32 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_eps"
+                android:id="@+id/crash_area_eps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/area_rh"
+                android:layout_below="@+id/crash_area_rh"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_eps"
+                    android:id="@+id/crash_img_eps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_rh"
+                    android:layout_below="@+id/crash_img_rh"
                     android:layout_column="0"
                     android:layout_gravity="center_vertical"
                     android:layout_row="2"
                     android:src="@drawable/medical_bag" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_eps"
+                    android:id="@+id/crash_til_eps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_eps"
+                        android:id="@+id/crash_campo_eps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -271,41 +271,77 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/area_seguro"
+                android:id="@+id/crash_area_seguro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/area_eps"
+                android:layout_below="@+id/crash_area_eps"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 
                 <ImageView
-                    android:id="@+id/img_seguro"
+                    android:id="@+id/crash_img_seguro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_eps"
+                    android:layout_below="@+id/crash_img_eps"
                     android:layout_column="0"
                     android:layout_gravity="center_vertical"
                     android:layout_row="2"
                     android:src="@drawable/alarm_light" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_seguro"
+                    android:id="@+id/crash_til_seguro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp">
 
                     <EditText
-                        android:id="@+id/campo_seguro"
+                        android:id="@+id/crash_campo_seguro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="@string/hint_seguro"
-                        android:inputType="text"
+                        android:inputType="none"
+                        android:singleLine="true"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/crash_area_message_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/crash_area_seguro"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp">
+
+                <ImageView
+                    android:id="@+id/crash_img_message_warning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/crash_area_seguro"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:layout_row="2" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/crash_til_message_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp">
+
+                    <EditText
+                        android:id="@+id/crash_campo_message_warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Mensaje Enviado"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-        </RelativeLayout>
 
+        </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
+

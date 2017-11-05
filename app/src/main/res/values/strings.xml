@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="facebook_application_id" translatable="false">1847200868925270</string>
 
-    <string name="title_section1">Home</string>
+    <string name="title_section1">Inicio</string>
     <string name="title_section2">Mapa</string>
     <string name="title_section3">Contactos</string>
     <string name="title_section4">Datos</string>
@@ -19,4 +19,8 @@
     <string name="hint_rh">R.H.</string>
     <string name="hint_eps">E.P.S.</string>
     <string name="hint_seguro">Seguro</string>
+    <string name="message_warning">Ayuda!!!  Acabo de sufrir un accidente</string>
+    <string name="message_title">Mensaje de emergencia</string>
+    <string name="pref_title_ringtone">Rooster</string>
+    <string name="hint_cedula">Cedula</string>
 </resources>

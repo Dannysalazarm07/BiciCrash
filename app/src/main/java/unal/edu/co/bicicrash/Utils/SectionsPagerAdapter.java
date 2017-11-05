@@ -12,7 +12,7 @@ import java.util.List;
  * títulos de las pestañas
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> mFragments = new ArrayList<>();
+    private final List<Object> mFragments = new ArrayList<>();
     private final List<String> mFragmentTitles = new ArrayList<>();
 
     public SectionsPagerAdapter(FragmentManager fm) {
@@ -21,7 +21,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        return (Fragment) mFragments.get(position);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return mFragments.size();
     }
 
-    public void addFragment(Fragment fragment, String title) {
+    public void addFragment(Object fragment, String title) {
         mFragments.add(fragment);
         mFragmentTitles.add(title);
     }

@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context="unal.edu.co.bicicrash.Activities.SettingsActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="AQUI VAN LAS CONFIGURACIONES DEL LA APP" />
+
 </android.support.constraint.ConstraintLayout>

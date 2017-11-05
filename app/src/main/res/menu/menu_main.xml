@@ -1,12 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="unal.edu.co.bicicrash.Activities.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_contacts"
+        android:icon="@drawable/account_multiple"
+        android:title="@string/title_section3"/>
+
+    <item
+        android:id="@+id/action_information"
+        android:icon="@drawable/account_card_details"
+        android:title="@string/title_section4"/>
 
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/settings"
-        android:orderInCategory="1"
-        android:title="Herramientas"
-        app:showAsAction="ifRoom" />
+        android:title="@string/title_section5"/>
 </menu>

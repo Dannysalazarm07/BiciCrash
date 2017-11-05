@@ -69,7 +69,7 @@ public class MainFragment extends Fragment{
         mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         mSensorAcc = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         toggleAcelerometerButtom = (ToggleButton) view.findViewById(R.id.toggleAcelerometerButtom);
-        crashLimit = 40;
+        crashLimit = 20;
         textView =  (TextView) view.findViewById(R.id.textView);
 
 

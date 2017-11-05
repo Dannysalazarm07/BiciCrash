@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     private LocationRequest mLocationRequest;
     private static final float SMALLEST_DISPLACEMENT = 0.15F; //con esto obtenemos desplazamiento minimo "un cuarto de metro"
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,10 +85,21 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         int id = item.getItemId();
 
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent ListSong = new Intent(getApplicationContext(), ToolsActivity.class);
-                startActivity(ListSong);
+            case R.id.action_contacts:
+                Intent contactsIntent = new Intent(getApplicationContext(), ContactsActivity.class);
+                startActivity(contactsIntent);
                 return true;
+
+            case R.id.action_information:
+                Intent informationIntent = new Intent(getApplicationContext(), InformationActivity.class);
+                startActivity(informationIntent);
+                return true;
+
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
