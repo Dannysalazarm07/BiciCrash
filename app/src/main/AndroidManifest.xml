@@ -13,9 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1847200868925270"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBX-Qfq5LYaH7g10PcVgzhPAjhsgN2JMbo" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id"/>
+
         <!-- android:value="AIzaSyDeMPwKTH6h-w1cZLYs519Jhthq7sfL_dw"/> -->
         <!-- android:value="AIzaSyCn5rViKFw0tKbqB7fX92UNwvnExJqGIXU" -->
 
@@ -23,26 +32,44 @@
             android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+<!--         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
+
         <activity android:name=".Activities.LoginActivity">
+                <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                            <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
         </activity>
+
         <activity android:name=".Activities.RegressiveTime" />
         <activity android:name=".Activities.ContactsActivity" />
         <activity android:name=".Activities.InformationActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.CrashMessageActivity"></activity>
+
+        <activity android:name=".Activities.ShareOnFb">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".Activities.MailSenderActivity">
+
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+
+        </activity>
+
     </application>
 
 </manifest>

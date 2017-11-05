@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     private void agregarMarcador() {
 
         LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
 
 
 
