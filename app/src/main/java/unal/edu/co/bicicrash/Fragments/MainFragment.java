@@ -122,41 +122,14 @@ public class MainFragment extends Fragment{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     // The toggle is enabled
-                    mSensorManager.registerListener(sensorEventListener, mSensorAcc, SensorManager.SENSOR_DELAY_NORMAL);
+                    mSensorManager.unregisterListener(sensorEventListener);
                 } else {
                     // The toggle is disabled
-                    mSensorManager.unregisterListener(sensorEventListener);
+                    mSensorManager.registerListener(sensorEventListener, mSensorAcc, SensorManager.SENSOR_DELAY_NORMAL);
                 }
             }
         });
 
-        view.findViewById(R.id.log_out_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(view.getId() == R.id.log_out_button){
-                    AuthUI.getInstance()
-                            .signOut(getActivity())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    Log.d("AUTH", "Usuario no esta logeado");
-                                    //getActivity().finish();
-                                    startActivityForResult(AuthUI.getInstance()
-                                            .createSignInIntentBuilder()
-                                            .setAvailableProviders(
-                                                    Arrays.asList(
-                                                            new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
-                                                            new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build())
-
-                                            ).build(), 0);
-                                }
-                            });
-                }
-
-            }
-        });
         return view;
     }
 
@@ -167,7 +140,6 @@ public class MainFragment extends Fragment{
 
     @Override
     public void onPause() {
-        mSensorManager.unregisterListener(sensorEventListener);
         super.onPause();
     }
 

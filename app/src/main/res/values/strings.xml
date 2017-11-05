@@ -23,4 +23,6 @@
     <string name="message_title">Mensaje de emergencia</string>
     <string name="pref_title_ringtone">Rooster</string>
     <string name="hint_cedula">Cedula</string>
+
+    <string name="log_out">Salir</string>
 </resources>

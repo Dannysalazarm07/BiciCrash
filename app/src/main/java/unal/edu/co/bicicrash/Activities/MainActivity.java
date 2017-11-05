@@ -15,9 +15,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -28,8 +30,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
@@ -100,9 +105,35 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
                 startActivity(settingsIntent);
                 return true;
 
+            case R.id.action_log_out:
+                logOutAction();
+                return true;
+                
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void logOutAction(){
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        Log.d("AUTH", "Usuario no esta logeado");
+                        //getActivity().finish();
+                        startActivityForResult(AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(
+                                        Arrays.asList(
+                                                new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build())
+
+                                ).build(), 0);
+                    }
+                });
     }
 
     //En este metodo se agregan los Fragmentos a la activity
