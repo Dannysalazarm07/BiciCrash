@@ -18,6 +18,8 @@ import com.facebook.FacebookDialog;
 import com.facebook.FacebookSdk;
 import com.facebook.internal.FacebookDialogFragment;
 import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
@@ -29,17 +31,17 @@ public class ShareOnFb extends FragmentActivity {
     Intent intentAfterFB=new Intent(this, MainActivity.class);
 
      ShareLinkContent content;
-
+     ShareContent content2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
 
         super.onCreate(savedInstanceState);
     //  setContentView(R.layout.activity_sahre_on_fb);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
+
 
         final Thread thread = new Thread(new Runnable() {
             @Override
