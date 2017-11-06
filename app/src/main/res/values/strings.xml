@@ -25,4 +25,7 @@
     <string name="hint_cedula">Cedula</string>
 
     <string name="log_out">Salir</string>
+    <string name="message_input_email">ingresa un correo electrónico</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 </resources>

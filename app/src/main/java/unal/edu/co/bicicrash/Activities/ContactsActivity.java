@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,82 +15,49 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
+import unal.edu.co.bicicrash.Fragments.EmailContactsFragment;
+import unal.edu.co.bicicrash.Fragments.MainFragment;
+import unal.edu.co.bicicrash.Fragments.PhoneContactsFragment;
 import unal.edu.co.bicicrash.R;
 import unal.edu.co.bicicrash.Utils.AdapterItem;
 import unal.edu.co.bicicrash.Utils.BiciContact;
+import unal.edu.co.bicicrash.Utils.SectionsPagerAdapter;
+import unal.edu.co.bicicrash.Utils.SectionsPagerAdapterForMainActivity;
 
 
 public class ContactsActivity extends AppCompatActivity {
 
-    private TextView contactNumber;
-    private FloatingActionButton buttonPickContact;
-    private ListView contactListView;
     private ArrayList arrayContacts;
-    private AdapterItem adapter;
-
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
-        buttonPickContact = (FloatingActionButton) findViewById(R.id.pickcontact);
+        // Setear adaptador al viewpager.
+        mViewPager = (ViewPager) findViewById(R.id.contacts_pager);
+        setupViewPager(mViewPager);
 
-        arrayContacts = new ArrayList<BiciContact>();
-        contactListView = (ListView)findViewById(R.id.listViewContact);
-        adapter = new AdapterItem(this, arrayContacts);
-        contactListView.setAdapter(adapter);
-
-
-        buttonPickContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(intent, 0 );
-                }
-            }
-        });
+        // Preparar las pestañas
+        TabLayout tabs = (TabLayout) findViewById(R.id.contact_tabs);
+        tabs.setupWithViewPager(mViewPager);
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //En este metodo se agregan los Fragmentos a la activity
+    private void setupViewPager(ViewPager viewPager) {
+        //El adaptador enlaza las biñetas del ViewPager con cada Fragment.
+        // Administra la forma de mostar las Fragments
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        if (requestCode == 0  && resultCode == RESULT_OK) {
+        adapter.addFragment(new PhoneContactsFragment(), "Phone");
+        adapter.addFragment(new EmailContactsFragment(), "Correo");
 
-            Uri contactUri = data.getData();
-            String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY};
-            Cursor cursor = getContentResolver().query(contactUri, projection,
-                    null, null, null);
-
-            if (cursor != null && cursor.moveToFirst()) {
-
-                int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                String number = cursor.getString(numberIndex);
-
-                int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY);
-                String name = cursor.getString(nameIndex);
-
-                //Aagrega el contacto a la lista de contactos
-                addContact(name, number);
-
-                //Muestra la lista de contactos en pantalla
-                showContacts();
-            }
-            else{
-                contactNumber.setText("Estoy afuera del cursor");
-            }
-        }
+        viewPager.setAdapter(adapter);
     }
 
-    public void addContact(String name, String number){
-        arrayContacts.add(new BiciContact(name,number));
-    }
 
-    public void showContacts(){
-        contactListView.setAdapter(adapter);
-    }
 
 }
