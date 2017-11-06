@@ -3,9 +3,11 @@ package unal.edu.co.bicicrash.Fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -29,9 +31,7 @@ public class PhoneContactsFragment extends Fragment {
     private ArrayList arrayContacts;
     private ListView contactListView;
     private AdapterItem adapter;
-
-
-
+    private SharedPreferences sharedPref;
 
 
     public PhoneContactsFragment() {
@@ -49,8 +49,10 @@ public class PhoneContactsFragment extends Fragment {
         contactListView = (ListView)view.findViewById(R.id.listViewContact);
         adapter = new AdapterItem(getActivity(), arrayContacts);
         contactListView.setAdapter(adapter);
-
         buttonPickContact = (FloatingActionButton) view.findViewById(R.id.pickcontact);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+
 
         buttonPickContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +102,23 @@ public class PhoneContactsFragment extends Fragment {
 
     public void showContacts() {
         contactListView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        SharedPreferences.Editor editPref = sharedPref.edit();
+        Log.d("########### stop", "estoy en STOP");
+
+
+        for(int i=0; i<arrayContacts.size(); i++){
+            BiciContact biciContact = (BiciContact) arrayContacts.get(i);
+            Log.d("########### NOMBRE", biciContact.getName());
+            editPref.putString("phoneName"+String.valueOf(i), biciContact.getName());
+            editPref.putString("phoneNumber"+String.valueOf(i), biciContact.getNumber());
+        }
+
+        //editPref.commit();
     }
 
 }
