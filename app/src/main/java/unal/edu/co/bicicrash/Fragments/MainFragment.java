@@ -93,8 +93,8 @@ public class MainFragment extends Fragment{
 
                     sumForces = Math.abs(curX) + Math.abs(curY) + Math.abs(curZ);
 
-                    if (sumForces> max)
-                        max = sumForces;
+//                    if (sumForces> max)
+//                        max = sumForces;
                     if( sumForces > crashLimit ){
                         Intent redirect = new Intent(getActivity(), RegressiveTime.class);
                         startActivity(redirect);
@@ -102,12 +102,12 @@ public class MainFragment extends Fragment{
                         graphLastXValue += 1d;
                         mSeries.appendData(new DataPoint(graphLastXValue, sumForces), true, 40);
 
-                        textView.setText(
-                                "x: " + curX +
-                                        "\ny: " + curY +
-                                        "\nz: " + curZ +
-                                        "\nSuma: " + sumForces +
-                                        "\nMaximo: : " + max);
+//                        textView.setText(
+//                                "x: " + curX +
+//                                        "\ny: " + curY +
+//                                        "\nz: " + curZ +
+//                                        "\nSuma: " + sumForces +
+//                                        "\nMaximo: : " + max);
                     }
                 }
             }

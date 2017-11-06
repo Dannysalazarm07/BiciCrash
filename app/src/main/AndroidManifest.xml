@@ -6,8 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
-
-
+    <!--Necesario para generar los permisos de envio de SMS-->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!--Necesario para generar los permisos de selección de contacto para enviar SMS-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"

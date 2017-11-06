@@ -3,7 +3,9 @@ package unal.edu.co.bicicrash.Fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ public class EmailContactsFragment extends Fragment {
     private AdapterItem adapter;
     private EditText inputName;
     private EditText inputEmail;
+    private SharedPreferences sharedPref;
 
     public EmailContactsFragment() {
 
@@ -45,15 +48,28 @@ public class EmailContactsFragment extends Fragment {
         contactListView = (ListView) view.findViewById(R.id.listViewEmailContacts);
         adapter = new AdapterItem(getActivity(), arrayEmailContacts);
         contactListView.setAdapter(adapter);
-
-
         buttonPickContact = (FloatingActionButton) view.findViewById(R.id.pickEmailContact);
+
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+
+        for(int i=0; i<5; i++) {
+            String name = sharedPref.getString("emailName" + String.valueOf(i), "");
+            String number = sharedPref.getString("emailNumber" + String.valueOf(i), "");
+            if(!name.equals("")){
+                arrayEmailContacts.add(new BiciContact(name, number));
+            }
+        }
+
+        if (arrayEmailContacts.size() >= 5) {
+            buttonPickContact.setVisibility(View.GONE);
+        }
+
+        showContacts();
 
         buttonPickContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (arrayEmailContacts.size() < 5) {
 
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
                 alertDialog.setTitle(R.string.fui_provider_name_email);
@@ -72,6 +88,9 @@ public class EmailContactsFragment extends Fragment {
                                 String name = inputName.getText().toString();
                                 String email = inputEmail.getText().toString();
                                 addEmailContact(name, email);
+                                if (arrayEmailContacts.size() >= 5) {
+                                    buttonPickContact.setVisibility(View.GONE);
+                                }
                                 showContacts();
                             }
                         });
@@ -84,10 +103,7 @@ public class EmailContactsFragment extends Fragment {
                         });
 
                     alertDialog.show();
-                }else {
-                    // desaparece el boton del layout
-                    buttonPickContact.setVisibility(View.GONE);
-                }
+
             }
         });
         return view;
@@ -101,4 +117,17 @@ public class EmailContactsFragment extends Fragment {
         contactListView.setAdapter(adapter);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        SharedPreferences.Editor editPref = sharedPref.edit();
+
+        for(int i=0; i<arrayEmailContacts.size(); i++){
+            BiciContact biciContact = (BiciContact) arrayEmailContacts.get(i);
+            editPref.putString("emailName"+String.valueOf(i), biciContact.getName());
+            editPref.putString("emailNumber"+String.valueOf(i), biciContact.getNumber());
+        }
+
+        editPref.commit();
+    }
 }

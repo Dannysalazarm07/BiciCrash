@@ -17,7 +17,7 @@
     <EditTextPreference
         android:key="timeForWait"
         android:summary="Seleccione el timepo de espera"
-        android:defaultValue="20"
+        android:defaultValue="8"
         android:numeric="integer"
         android:title="Tiempo de espera"  />
 

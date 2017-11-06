@@ -53,6 +53,17 @@ public class PhoneContactsFragment extends Fragment {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
+        for(int i=0; i<5; i++) {
+            String name = sharedPref.getString("phoneName" + String.valueOf(i), "");
+            String number = sharedPref.getString("phoneNumber" + String.valueOf(i), "");
+            if(!name.equals("")){
+                arrayContacts.add(new BiciContact(name, number));
+            }
+        }
+        if (arrayContacts.size() >= 5) {
+            buttonPickContact.setVisibility(View.GONE);
+        }
+        showContacts();
 
         buttonPickContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +99,10 @@ public class PhoneContactsFragment extends Fragment {
                 //Aagrega el contacto a la lista de contactos
                 addContact(name, number);
 
+                if (arrayContacts.size() >= 5) {
+                    buttonPickContact.setVisibility(View.GONE);
+                }
+
                 //Muestra la lista de contactos en pantalla
                 showContacts();
             } else {
@@ -108,17 +123,14 @@ public class PhoneContactsFragment extends Fragment {
     public void onStop() {
         super.onStop();
         SharedPreferences.Editor editPref = sharedPref.edit();
-        Log.d("########### stop", "estoy en STOP");
-
 
         for(int i=0; i<arrayContacts.size(); i++){
             BiciContact biciContact = (BiciContact) arrayContacts.get(i);
-            Log.d("########### NOMBRE", biciContact.getName());
             editPref.putString("phoneName"+String.valueOf(i), biciContact.getName());
             editPref.putString("phoneNumber"+String.valueOf(i), biciContact.getNumber());
         }
 
-        //editPref.commit();
+        editPref.commit();
     }
 
 }
