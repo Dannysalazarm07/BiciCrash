@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,12 +29,17 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
 import unal.edu.co.bicicrash.Fragments.MainFragment;
+import unal.edu.co.bicicrash.Models.PositionLL;
 import unal.edu.co.bicicrash.R;
 import unal.edu.co.bicicrash.Utils.SectionsPagerAdapterForMainActivity;
 
@@ -49,12 +55,18 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     private LocationRequest mLocationRequest;
     private static final float SMALLEST_DISPLACEMENT = 0.15F; //con esto obtenemos desplazamiento minimo "un cuarto de metro"
 
+    //FirebaseObjects
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        
+        initiarFirebase();
 
         // Setear adaptador al viewpager.
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -68,6 +80,13 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
+
+    }
+    //Initiar firebase object for this project
+    private void initiarFirebase() {
+        FirebaseApp.initializeApp(MainActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
 
     }
 
@@ -213,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     }
 
 
+    /////ACA SE ACTUALIZA LA LOCALIZACION
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
@@ -220,11 +240,23 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         agregarMarcador();
 
+        //Sybir a firebase la ubicacion
+
+        PositionLL p = new PositionLL();
+        p.setUid(UUID.randomUUID().toString());
+        //Se debe cambiar a arreglo.
+        p.setUbication(latLng.toString());
+
+        databaseReference.child("Ubicacion").child(p.getUid()).setValue(p);
+
+        Log.d("mLastUpdateTime",mLastUpdateTime);
+        Log.d("mlatLng", String.valueOf(latLng));
     }
 
     private void agregarMarcador() {
 
         LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        Log.d("currentLatLng", String.valueOf(currentLatLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
 
 
