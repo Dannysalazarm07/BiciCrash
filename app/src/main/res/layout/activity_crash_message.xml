@@ -22,9 +22,10 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/imageButtonID"
+                android:scaleType="fitXY"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="88dp"
@@ -35,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/imageButton"
+                android:layout_below="@+id/imageButtonID"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
@@ -348,7 +349,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="13dp"
-                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toEndOf="@+id/imageButtonID"
                 android:background="@color/cardview_light_background"
                 app:srcCompat="@drawable/facebook_box" />
 

@@ -19,21 +19,24 @@
         <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent" >
+            <!--android:padding="2dip"-->
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/imageButton"
+                android:scaleType="fitXY"
+                android:layout_width="120dip"
+                android:layout_height="120dip"
+                android:id="@+id/imageButtonID"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/account_settings"/>
+                android:src="@drawable/account_settings" />
+
 
             <LinearLayout
                 android:id="@+id/area_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_below="@+id/imageButton"
+                android:layout_below="@+id/imageButtonID"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp">
 

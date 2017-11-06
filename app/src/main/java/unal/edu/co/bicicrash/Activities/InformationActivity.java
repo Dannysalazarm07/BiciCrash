@@ -1,23 +1,16 @@
 package unal.edu.co.bicicrash.Activities;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
-import java.net.URI;
-import java.util.regex.Pattern;
 
 import unal.edu.co.bicicrash.R;
 
@@ -52,7 +45,7 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-        imageButton = findViewById(R.id.imageButton);
+        imageButton = findViewById(R.id.imageButtonID);
         name = (EditText) findViewById(R.id.campo_nombre);
         identification = (EditText) findViewById(R.id.campo_cedula);
         phone = (EditText) findViewById(R.id.campo_telefono);
@@ -68,6 +61,8 @@ public class InformationActivity extends AppCompatActivity {
         String dir = sharedPref.getString("imageConfig", "android.resource://unal.edu.co.bicicrash/" + R.drawable.bicicrash_icon);
         imageUri = Uri.parse(dir);
         imageButton.setImageURI(imageUri);
+
+
         name.setText(sharedPref.getString("nameConfig", ""));
         identification.setText(sharedPref.getString("identificationConfig", ""));
         phone.setText(sharedPref.getString("phoneConfig", ""));
@@ -97,10 +92,17 @@ public class InformationActivity extends AppCompatActivity {
 
 
         if (resultCode == RESULT_OK && requestCode == PHOTO_SELECTED) {
+
+
             imageUri = data.getData();
+            grantUriPermission(getPackageName(), imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            Bitmap bitmapimg = BitmapFactory.decodeFile(imageUri.getPath());
+            //Bitmap bitmap = BitmapFactory.decodeFile(.toString());
 
             imageButton.setImageURI(imageUri);
-            grantUriPermission(getPackageName(), imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
 
         }
     }
