@@ -7,7 +7,7 @@
 
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="300dip"
         android:id="@+id/graph" />
 
 
@@ -31,15 +31,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="ToggleButton" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log Out"
-        android:id="@+id/log_out_button"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/toggleAcelerometerButtom"/>
+        android:text="ToggleButton"
+        android:checked="true"/>
 
 
 </RelativeLayout>
