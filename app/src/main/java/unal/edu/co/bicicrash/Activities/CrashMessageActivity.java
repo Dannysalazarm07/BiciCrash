@@ -1,15 +1,21 @@
 package unal.edu.co.bicicrash.Activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import unal.edu.co.bicicrash.R;
 
 public class CrashMessageActivity extends AppCompatActivity {
+
+    ImageButton shareFbButton;
 
     private SharedPreferences sharedPref;
     private EditText name;
@@ -31,10 +37,20 @@ public class CrashMessageActivity extends AppCompatActivity {
     private EditText messageWarning;
     private String messageWarningConfig;
 
+    Intent myShareFacebook;
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_message);
+
+        myShareFacebook = new Intent(CrashMessageActivity.this, ShareOnFb.class);
 
         name = (EditText) findViewById(R.id.crash_campo_nombre);
         identification = (EditText) findViewById(R.id.crash_campo_cedula);
@@ -78,6 +94,16 @@ public class CrashMessageActivity extends AppCompatActivity {
         secure.setEnabled(false);
         messageWarning.setText(messageWarningConfig);
         messageWarning.setEnabled(false);
+
+        shareFbButton = (ImageButton)findViewById(R.id.fbB);
+
+        shareFbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(myShareFacebook);
+            }
+        });
+
 
     }
 }

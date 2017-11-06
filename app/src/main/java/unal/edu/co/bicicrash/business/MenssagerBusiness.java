@@ -35,7 +35,7 @@ public class MenssagerBusiness {
             sender.sendMail("Prueba envio desde la app",
                     "Bueno, probando el envio automatico desde bicicrash",
                     "soportebicicrash@gmail.com",
-                    "dannysalazarm07@gmail.com, miatorresch@unal.edu.co");
+                    "dannysalazarm07@gmail.com, miatorresch@unal.edu.co, jalopezfa@unal.edu.co");
 
         } catch (Exception e) {
             Log.e("SendMail", e.getMessage(), e);

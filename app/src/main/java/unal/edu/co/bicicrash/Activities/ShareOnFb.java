@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookDialog;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.internal.FacebookDialogFragment;
 import com.facebook.share.Sharer;
@@ -28,20 +29,44 @@ import unal.edu.co.bicicrash.R;
 public class ShareOnFb extends FragmentActivity {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
-    Intent intentAfterFB=new Intent(this, MainActivity.class);
+    Intent intentAfterFB = new Intent(this, MainActivity.class);
 
-     ShareLinkContent content;
-     ShareContent content2;
+    ShareLinkContent content;
+    ShareContent content2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
-    //  setContentView(R.layout.activity_sahre_on_fb);
+        //  setContentView(R.layout.activity_sahre_on_fb);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
 
+
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                Toast.makeText(getApplicationContext(), " Publicación en facebok exitosa!", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), "Se canceló la publicación en facebook", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getApplicationContext(), "Ocurrió un error al publicar en facebook", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -54,13 +79,15 @@ public class ShareOnFb extends FragmentActivity {
             @Override
             public void run() {
                 //shareDialog.show(content);
-                Log.d("Mensaje", "ENTRANDOOOO");
+                //Log.d("Mensaje", "ENTRANDOOOO");
                 //thread.interrupt();
             }
         }, 5000);
+
+
     }
 
-    public  void publicar(){
+    public void publicar() {
         try {
 
             if (ShareDialog.canShow(ShareLinkContent.class)) {
@@ -82,8 +109,8 @@ public class ShareOnFb extends FragmentActivity {
                 shareDialog.show(content, ShareDialog.Mode.AUTOMATIC);
 
             }
-        }catch (Exception e){
-            Toast.makeText(this, "algo paso: "+e.getMessage(), Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "algo paso: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
     }

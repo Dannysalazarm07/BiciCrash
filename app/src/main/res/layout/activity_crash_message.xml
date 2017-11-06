@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,25 +18,26 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <ImageButton
+                android:id="@+id/imageButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/imageButton"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/account_settings"/>
+                android:layout_marginStart="88dp"
+                android:src="@drawable/account_settings" />
 
             <LinearLayout
                 android:id="@+id/crash_area_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/imageButton"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/imageButton"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_cliente"
@@ -49,8 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:hint="@string/hint_nombre"
-                    >
+                    android:hint="@string/hint_nombre">
 
                     <EditText
                         android:id="@+id/crash_campo_nombre"
@@ -66,10 +67,10 @@
                 android:id="@+id/crash_area_cedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="11dp"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/crash_area_nombre"
-                android:layout_alignParentStart="true">
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_cedula"
@@ -98,10 +99,10 @@
                 android:id="@+id/crash_area_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="11dp"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/crash_area_cedula"
-                android:layout_alignParentStart="true">
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_telefono"
@@ -130,10 +131,10 @@
                 android:id="@+id/crash_area_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_telefono"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_telefono"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_correo"
@@ -166,10 +167,10 @@
                 android:id="@+id/crash_area_genero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_correo"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_correo"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_genero"
@@ -202,10 +203,10 @@
                 android:id="@+id/crash_area_rh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_genero"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_genero"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_rh"
@@ -238,10 +239,10 @@
                 android:id="@+id/crash_area_eps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_rh"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_rh"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_eps"
@@ -274,10 +275,10 @@
                 android:id="@+id/crash_area_seguro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_eps"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_eps"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_seguro"
@@ -302,8 +303,7 @@
                         android:ems="10"
                         android:hint="@string/hint_seguro"
                         android:inputType="none"
-                        android:singleLine="true"
-                        />
+                        android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -311,10 +311,10 @@
                 android:id="@+id/crash_area_message_warning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/crash_area_seguro"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp">
+                android:layout_below="@+id/crash_area_seguro"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/crash_img_message_warning"
@@ -340,6 +340,25 @@
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/fbB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@+id/imageButton"
+                android:background="@color/cardview_light_background"
+                app:srcCompat="@drawable/facebook_box" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/fbB"
+                android:layout_below="@+id/fbB"
+                android:text="Publicame" />
 
         </RelativeLayout>
     </ScrollView>
