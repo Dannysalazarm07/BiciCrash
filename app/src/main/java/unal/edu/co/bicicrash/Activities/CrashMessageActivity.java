@@ -1,15 +1,22 @@
 package unal.edu.co.bicicrash.Activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import unal.edu.co.bicicrash.R;
 
 public class CrashMessageActivity extends AppCompatActivity {
+
+    ImageButton shareFbButton;
 
     private SharedPreferences sharedPref;
     private EditText name;
@@ -30,11 +37,23 @@ public class CrashMessageActivity extends AppCompatActivity {
     private String secureConfig;
     private EditText messageWarning;
     private String messageWarningConfig;
+    private ImageButton imageButton;
+
+    Intent myShareFacebook;
+    private Uri imageUri;
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_message);
+
+        myShareFacebook = new Intent(CrashMessageActivity.this, ShareOnFb.class);
 
         name = (EditText) findViewById(R.id.crash_campo_nombre);
         identification = (EditText) findViewById(R.id.crash_campo_cedula);
@@ -45,6 +64,7 @@ public class CrashMessageActivity extends AppCompatActivity {
         eps = (EditText) findViewById(R.id.crash_campo_eps);
         secure = (EditText) findViewById(R.id.crash_campo_seguro);
         messageWarning = (EditText) findViewById(R.id.crash_campo_message_warning);
+        imageButton = (ImageButton) findViewById(R.id.imageButtonID);
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -56,6 +76,11 @@ public class CrashMessageActivity extends AppCompatActivity {
         rh.setText(sharedPref.getString("rhConfig", ""));
         eps.setText(sharedPref.getString("epsConfig", ""));
         secure.setText(sharedPref.getString("secureConfig", ""));
+
+        String dir = sharedPref.getString("imageConfig", "android.resource://unal.edu.co.bicicrash/" + R.drawable.bicicrash_icon);
+        imageUri = Uri.parse(dir);
+
+        imageButton.setImageURI(imageUri);
 
         messageWarningConfig = sharedPref.getString("messageConfig", "Mensaje por defecto");
 
@@ -78,6 +103,16 @@ public class CrashMessageActivity extends AppCompatActivity {
         secure.setEnabled(false);
         messageWarning.setText(messageWarningConfig);
         messageWarning.setEnabled(false);
+
+        shareFbButton = (ImageButton)findViewById(R.id.fbB);
+
+        shareFbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(myShareFacebook);
+            }
+        });
+
 
     }
 }

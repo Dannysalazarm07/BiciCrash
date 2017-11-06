@@ -1,21 +1,16 @@
 package unal.edu.co.bicicrash.Activities;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-
-import java.net.URI;
-import java.util.regex.Pattern;
 
 import unal.edu.co.bicicrash.R;
 
@@ -41,17 +36,16 @@ public class InformationActivity extends AppCompatActivity {
     private String secureConfig;
 
     private final int PHOTO_SELECTED = 0;
-    private Uri imageUri;
-
+    Uri imageUri;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-
-        imageButton = findViewById(R.id.imageButton);
+        imageButton = findViewById(R.id.imageButtonID);
         name = (EditText) findViewById(R.id.campo_nombre);
         identification = (EditText) findViewById(R.id.campo_cedula);
         phone = (EditText) findViewById(R.id.campo_telefono);
@@ -64,11 +58,11 @@ public class InformationActivity extends AppCompatActivity {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-        imageUri = Uri.parse("android.resource://"+getPackageName()+"/drawable/bibicrash_icon.png");
-        //imageUri = Uri.parse("@drawable/bicicrash_icon.png");
+        String dir = sharedPref.getString("imageConfig", "android.resource://unal.edu.co.bicicrash/" + R.drawable.bicicrash_icon);
+        imageUri = Uri.parse(dir);
         imageButton.setImageURI(imageUri);
-        //imageButton.setImageResource(R.drawable.bicicrash_icon);
-        //imageButton.setImageURI(Uri.parse(sharedPref.getString("imageConfig", "android.resource://drawable//account_settings.xml")));
+
+
         name.setText(sharedPref.getString("nameConfig", ""));
         identification.setText(sharedPref.getString("identificationConfig", ""));
         phone.setText(sharedPref.getString("phoneConfig", ""));
@@ -86,20 +80,30 @@ public class InformationActivity extends AppCompatActivity {
         });
     }
 
-    public void openGallery(){
+    public void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, PHOTO_SELECTED);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if(resultCode == RESULT_OK && requestCode == PHOTO_SELECTED){
+        if (resultCode == RESULT_OK && requestCode == PHOTO_SELECTED) {
+
+
             imageUri = data.getData();
+            grantUriPermission(getPackageName(), imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            Bitmap bitmapimg = BitmapFactory.decodeFile(imageUri.getPath());
+            //Bitmap bitmap = BitmapFactory.decodeFile(.toString());
+
             imageButton.setImageURI(imageUri);
-            Log.d("####### Una Uri:", imageUri.toString());
+
+
+
         }
     }
 
@@ -116,7 +120,8 @@ public class InformationActivity extends AppCompatActivity {
         editPref.putString("rhConfig", rh.getText().toString());
         editPref.putString("epsConfig", eps.getText().toString());
         editPref.putString("secureConfig", secure.getText().toString());
-        //editPref.putString("imageConfig", imageUri.toString());
+
+        editPref.putString("imageConfig", imageUri.toString());
 
         editPref.commit();
     }

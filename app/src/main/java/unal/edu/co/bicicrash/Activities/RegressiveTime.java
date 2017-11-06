@@ -20,7 +20,7 @@ public class RegressiveTime extends AppCompatActivity {
     TextView timerView;
     FloatingActionButton aceptButton;
     FloatingActionButton cancelButton;
-    Intent myIntent;
+    Intent myInformation;
     Intent myIntentMail;
     private int time;
     private String timeShared;
@@ -38,7 +38,7 @@ public class RegressiveTime extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        myIntent = new Intent(RegressiveTime.this, MailSenderActivity.class);
+        myInformation = new Intent(RegressiveTime.this, CrashMessageActivity.class);
         myIntentMail = new Intent(RegressiveTime.this, ShareOnFb.class);
         menssagerBusiness= new MenssagerBusiness();
 
@@ -69,18 +69,16 @@ public class RegressiveTime extends AppCompatActivity {
                 new MenssagerBusiness.msnTask().execute();
                 try {
                     Boolean isSentMail = new MenssagerBusiness.mailerTask().execute().get();
-                    Toast.makeText(getApplicationContext()," Envio de correos exitoso!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext()," Envío de correos exitoso!",Toast.LENGTH_SHORT).show();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
-                //ShareDialog shareDialo= new ShareDialog();
 
+                startActivity(myInformation);
 
-                startActivity(myIntent);
-
-                startActivity(myIntentMail);
+                //startActivity(myIntentMail);
 
 
                 // TODO redirecciona a una actividad con la informacion del usuario
