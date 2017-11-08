@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.ConnectionResult;
@@ -33,12 +34,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import unal.edu.co.bicicrash.Fragments.BiciMapFragment;
@@ -62,16 +70,42 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     //FirebaseObjects
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    private List<PositionLL> listPessoa = new ArrayList<PositionLL>();
+    private ArrayAdapter<PositionLL> arrayAdapterPessoa;
+    private FirebaseUser user;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private String uuidUser;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initiarFirebase();
+        //8Umwz8HKYTY9OI42eR30hJmIpui1
 
+        initiarFirebase();
+        eventoDatabase();
+        getUserFireBase();
+
+        Log.d("UUIDDD", "UID "+uuidUser);
 
         // Setear adaptador al viewpager.
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -85,8 +119,28 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
-
     }
+
+    private void getUserFireBase() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("FI777", "onAuthStateChanged:signed_in:" + user.getUid());
+                    uuidUser =  user.getUid();
+                    Log.d("FI888", "onAuthStateChanged:signed_in:" + uuidUser);
+                } else {
+                    // User is signed out
+                    Log.d("Nfb", "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+
+        };
+    }
+
     //Initiar firebase object for this project
     private void initiarFirebase() {
         FirebaseApp.initializeApp(MainActivity.this);
@@ -155,6 +209,31 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
                 });
     }
 
+    private void eventoDatabase() {
+        databaseReference.child("Ubication").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listPessoa.clear();
+                for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                    PositionLL p = objSnapshot.getValue(PositionLL.class);
+                    Log.i("Positiona ",p.getUbication());
+                    listPessoa.add(p);
+                    Log.i("TODOo ", listPessoa.get(0).getUbication());
+
+
+                }
+//                arrayAdapterPessoa = new ArrayAdapter<PositionLL>(MainActivity.this,
+//                        android.R.layout.simple_list_item_1,listPessoa);
+//                listV_dados.setAdapter(arrayAdapterPessoa);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     //En este metodo se agregan los Fragmentos a la activity
     private void setupViewPager(ViewPager viewPager) {
         //El adaptador enlaza las biñetas del ViewPager con cada Fragment.
@@ -196,6 +275,11 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
             //// OJO: Se grafican los siguinte puntos en el mapa a manera de ejemplo//////
             LatLng unal = new LatLng(4.6381938, -74.08404639999998);
             LatLng friend1 = new LatLng(4.6371948, -74.08404639999998);
+
+            LatLng friendOcana = new LatLng(8.2368542, -73.3208);
+            LatLng friendOcana2 = new LatLng(8.2365542, -73.32100);
+
+
             LatLng friend2 = new LatLng(4.6391938, -74.08404639999998);
             LatLng friend3 = new LatLng(4.6381938, -74.08414539999998);
             LatLng friend4 = new LatLng(4.6381938, -74.08424439999998);
@@ -218,6 +302,18 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
                     .title("Amigo 2")
                     .snippet("A 100 mtrs")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+
+            googleMap.addMarker(new MarkerOptions()
+                    .position(friendOcana)
+                    .title("Amigo oca1")
+                    .snippet("A 100 mtrs")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+
+            googleMap.addMarker(new MarkerOptions()
+                    .position(friendOcana2)
+                    .title("Amigo oca2")
+                    .snippet("A 100 mtrs")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
 
             googleMap.addMarker(new MarkerOptions()
                     .position(friend3)
@@ -268,17 +364,39 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
         String mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-        LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        final LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         agregarMarcador();
 
         //Sybir a firebase la ubicacion
 
-        PositionLL p = new PositionLL();
-        p.setUid(UUID.randomUUID().toString());
-        //Se debe cambiar a arreglo.
-        p.setUbication(latLng.toString());
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("FI777", "onAuthStateChanged:signed_in:" + user.getUid());
+                    uuidUser =  user.getUid();
 
-        databaseReference.child("Ubicacion").child(p.getUid()).setValue(p);
+                    //////////
+
+                    PositionLL p = new PositionLL();
+                    p.setUid(uuidUser);
+                    //Se debe cambiar a arreglo.
+                    p.setUbication(latLng.toString());
+
+                    databaseReference.child("Ubicacion").child(p.getUid()).setValue(p);
+                    /////////
+
+                    Log.d("FI888", "onAuthStateChanged:signed_in:" + uuidUser);
+                } else {
+                    // User is signed out
+                    Log.d("Nfb", "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+
+        };
 
         Log.d("mLastUpdateTime",mLastUpdateTime);
         Log.d("mlatLng", String.valueOf(latLng));

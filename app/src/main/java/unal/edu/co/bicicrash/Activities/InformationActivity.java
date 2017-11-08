@@ -9,9 +9,14 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import unal.edu.co.bicicrash.Models.PositionLL;
 import unal.edu.co.bicicrash.R;
 
 public class InformationActivity extends AppCompatActivity {
@@ -37,7 +42,6 @@ public class InformationActivity extends AppCompatActivity {
 
     private final int PHOTO_SELECTED = 0;
     Uri imageUri;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
