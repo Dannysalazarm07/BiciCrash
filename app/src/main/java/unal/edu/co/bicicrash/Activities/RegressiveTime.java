@@ -1,10 +1,9 @@
 package unal.edu.co.bicicrash.Activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
+import android.media.MediaPlayer;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
@@ -13,13 +12,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -29,11 +25,11 @@ import unal.edu.co.bicicrash.Utils.BiciContact;
 import unal.edu.co.bicicrash.business.MenssagerBusiness;
 
 public class RegressiveTime extends AppCompatActivity {
-    TextView timerView;
-    FloatingActionButton aceptButton;
-    FloatingActionButton cancelButton;
-    Intent myInformation;
-    Intent myIntentMail;
+    private TextView timerView;
+    private FloatingActionButton aceptButton;
+    private FloatingActionButton cancelButton;
+    private Intent myInformation;
+    private Intent myIntentMail;
     private int time;
     private String timeShared;
     private SharedPreferences sharedPref;
@@ -45,6 +41,8 @@ public class RegressiveTime extends AppCompatActivity {
     private String name;
     private String number;
     private boolean flag;
+    private boolean soundFlag;
+    private MediaPlayer mTimeMediaPlayer;
 
     @Override
     public void startActivity(Intent intent) {
@@ -65,13 +63,15 @@ public class RegressiveTime extends AppCompatActivity {
         setContentView(R.layout.activity_regressive_time);
 
         flag = true;
+        soundFlag = flag;
 
         timerView = (TextView) findViewById(R.id.timerView);
         aceptButton = (FloatingActionButton) findViewById(R.id.floatingActionButtonAcept);
         cancelButton = (FloatingActionButton) findViewById(R.id.floatingActionButtonClose);
 
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        mTimeMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sound_time);
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         for (int i = 0; i < 5; i++) {
             name = sharedPref.getString("emailName" + String.valueOf(i), "");
@@ -99,11 +99,15 @@ public class RegressiveTime extends AppCompatActivity {
         new CountDownTimer(time, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timerView.setText("seconds remaining: " + millisUntilFinished / 1000);
+                if(soundFlag){
+                    timerView.setText(String.valueOf(millisUntilFinished / 1000));
+                    mTimeMediaPlayer.start();
+                }else{
+                    this.cancel();
+                }
             }
 
             public void onFinish() {
-                timerView.setText("done!");
                 if(flag){
                     sendAllMessage();
                     startActivity(myInformation);
@@ -125,11 +129,11 @@ public class RegressiveTime extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundFlag = false;
                 Intent intent = new Intent(RegressiveTime.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -137,7 +141,6 @@ public class RegressiveTime extends AppCompatActivity {
         if (arrayPhoneContacts.size() > 0) {
 
             try {
-
                 //verificamos si tenemos los permisos concedidos para enviar un SMS
                 int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
                 if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -161,7 +164,6 @@ public class RegressiveTime extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), " No hay números registrados", Toast.LENGTH_SHORT).show();
         }
 
-
         try {
             if (arrayEmailContacts.size() > 0) {
                 Boolean isSentMail = new MenssagerBusiness.mailerTask(arrayEmailContacts, messageWarning).execute().get();
@@ -175,5 +177,12 @@ public class RegressiveTime extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+        //mTimeMediaPlayer.release();
     }
 }
