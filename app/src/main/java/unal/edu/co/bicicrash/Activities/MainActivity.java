@@ -276,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
             LatLng unal = new LatLng(4.6381938, -74.08404639999998);
             LatLng friend1 = new LatLng(4.6371948, -74.08404639999998);
 
-            LatLng friendOcana = new LatLng(8.2368542, -73.3208);
-            LatLng friendOcana2 = new LatLng(8.2365542, -73.32100);
+            LatLng friendOcana = new LatLng(8.2374666,-73.3542888);
+            LatLng friendOcana2 = new LatLng(8.2373966, -73.3547888);
 
 
             LatLng friend2 = new LatLng(4.6391938, -74.08404639999998);
@@ -385,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
                     //Se debe cambiar a arreglo.
                     p.setUbication(latLng.toString());
 
-                    databaseReference.child("Ubicacion").child(p.getUid()).setValue(p);
+                    databaseReference.child("Ubication").child(p.getUid()).setValue(p);
                     /////////
 
                     Log.d("FI888", "onAuthStateChanged:signed_in:" + uuidUser);
