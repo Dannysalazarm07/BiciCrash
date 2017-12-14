@@ -46,6 +46,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
 
         //Bloque la orientacion. En caso de un choque el telefono no cambiará su orientacion
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        positionUser();
 
 
     }
@@ -367,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         final LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         agregarMarcador();
 
-        //Sybir a firebase la ubicacion
+        //Subir a firebase la ubicacion
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -389,6 +391,7 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
                     /////////
 
                     Log.d("FI888", "onAuthStateChanged:signed_in:" + uuidUser);
+
                 } else {
                     // User is signed out
                     Log.d("Nfb", "onAuthStateChanged:signed_out");
@@ -402,7 +405,53 @@ public class MainActivity extends AppCompatActivity implements  OnMapReadyCallba
         Log.d("mlatLng", String.valueOf(latLng));
     }
 
-    private void agregarMarcador() {
+    public void positionUser( ) {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                Log.d("BDFIREBASE", "base de datos:" + databaseReference.getDatabase());
+                DatabaseReference UserRef = FirebaseDatabase.getInstance().getReference();
+                Log.d("ubicationDB", "base de datos db:" + UserRef);
+
+                UserRef.keepSynced(true);
+                UserRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Iterator<DataSnapshot> dataSnapshots = dataSnapshot.getChildren().iterator();
+                        Log.d("daSnaDB", "db:" + dataSnapshot.getValue(PositionLL.class).getUid());
+
+                        List<PositionLL> fcmUsers = new ArrayList<>();
+                        while (dataSnapshots.hasNext()) {
+                            DataSnapshot dataSnapshotChild = dataSnapshots.next();
+                            PositionLL fcmUser = dataSnapshotChild.getValue(PositionLL.class);
+                            fcmUsers.add(fcmUser);
+                            Log.d("LADBuser", "db:" + fcmUser.getUbication());
+
+                        }
+
+                        // Check your arraylist size and pass to list view like
+                        if(fcmUsers.size()>0)
+                        {
+                            Log.d("LADB", "db:" + fcmUsers.get(0).getUbication());
+
+
+                        }else
+                        {
+                            // Display dialog for there is no user available.
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // for handling database error
+                    }
+                });
+
+            }
+        };
+    }
+      private void agregarMarcador() {
 
         LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         Log.d("currentLatLng", String.valueOf(currentLatLng));
